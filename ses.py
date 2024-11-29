@@ -11,8 +11,8 @@ def lambda_handler(event, context):
     scality_region = os.getenv("SCALITY_REGION")
     # SES settings
     ses_client = boto3.client('ses')
-    sender_email = "info@abm.aws.pmicloud.biz"
-    recipient_emails = ["goker.inel@contracted.pmi.com","rephael.hayun@pmi.com","diana.gloss@pmi.com","ecaterina.serebreanschii@contracted.pmi.com","lia.rostashvili@pmi.com"]
+    sender_email = "info@" #domain namin başına info ekledik
+    recipient_emails = ["goker.inel@"]
     subject = "Data Transfer Status"
     # Connect to Scality S3
     s3_client = boto3.client(
@@ -23,7 +23,7 @@ def lambda_handler(event, context):
         region_name=scality_region  # Added region information here
     )
     # Define bucket name
-    bucket_name = "azintelecomcopybucket"
+    bucket_name = "........bucket"
     # Check files in the bucket
     try:
         response = s3_client.list_objects_v2(Bucket=bucket_name)
@@ -37,27 +37,27 @@ def lambda_handler(event, context):
             subject = "Data Transfer Status - Success"
             message_body = (f"I am pleased to inform you that the file from {today} has been successfully "
                             f"uploaded, and the file from {three_days_ago} has been successfully removed.\n\n"
-                            f"Diana Gloss\n"
+                            f"name\n"
                             f"Information Technology\n"
                             f"Manager IT Consumer\n\n"
-                            f"M: +972 (050) 7733310")
+                            f"M: +972 (050)")
         elif file_count > 3:
             subject = "Data Transfer Status - Failed"
             message_body = (f"Error: Delete Fail. File from {three_days_ago} has not been successfully removed.\n\n"
-                            f"Diana Gloss\n"
+                            f"name\n"
                             f"Information Technology\n"
                             f"Manager IT Consumer\n\n"
-                            f"M: +972 (050) 7733310")
+                            f"M: +972 (050)")
         else:
             # Check if there is a file with today's date
             uploaded_today = any(f['LastModified'].strftime("%Y-%m-%d") == today for f in files)
             if not uploaded_today:
                 subject = "Data Transfer Status - Failed"
                 message_body = (f"Error: Upload Fail. There is no new file {today}.\n\n"
-                                f"Diana Gloss\n"
-                                f"Information Technology\n"
-                                f"Manager IT Consumer\n\n"
-                                f"M: +972 (050) 7733310")
+                                f"name\n"
+                            f"Information Technology\n"
+                            f"Manager IT Consumer\n\n"
+                            f"M: +972 (050)")
             else:
                 return {"status": "No action needed"}  # Optional: Exit if no action is needed
  
