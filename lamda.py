@@ -6,11 +6,11 @@ from datetime import datetime
  
 # AWS kaynaklarını tanımlama
 
-source_bucket = 'asdatalocalizationcopy'
+source_bucket = 'kaynak bucket'
 
-destination_bucket = 'azintelecomcopybucket'
+destination_bucket = 'hedef bucket'
 
-log_bucket = 'asdatadailylog'  # Logları tutmak için yeni bir bucket
+log_bucket = 'log bucket'  # Logları tutmak için yeni bir bucket
  
 # Scality erişim bilgileri
 
